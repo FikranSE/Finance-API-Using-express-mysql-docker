@@ -7,7 +7,7 @@ Blog API implemented using Express.js and MySQL. Sequelize is used for ORM.
 You can install the project using the following command:
 
 ```
-git clone https://github.com/serhhatsari/blog-app
+https://github.com/FikranSE/Finance-API-Using-express-mysql-docker
 ```
 
 ## Running with Docker Compose
@@ -21,7 +21,7 @@ docker compose up --build -d
 Server is now accessible at the
 
 ```
-localhost:3000
+localhost:3001
 ```
 
 You can delete the containers using the following command:
@@ -65,7 +65,7 @@ kubectl delete -f deployment.yml
 Any endpoint that is exposed by the server can be accessible at the /docs endpoint.
 
 ```
-eg: localhost:3000/api/docs
+eg: localhost:3001/api/docs
 ```
 
 ## Local Development
