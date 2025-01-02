@@ -16,14 +16,39 @@ function getRugiById(req, res) {
 }
 
 // Fungsi untuk memperbarui data Rugi
-function updateRugi(req, res) {
-    rugiService.updateRugi(req, res);
-}
+const updateRugi = async (req, res) => {
+    try {
+        const { nama, jumlah, tanggal } = req.body;
+        const [updatedRows] = await Rugi.update(
+            { nama, jumlah, tanggal },
+            { where: { id: req.params.id } }
+        );
 
-// Fungsi untuk menghapus data Rugi
-function deleteRugi(req, res) {
-    rugiService.deleteRugi(req, res);
-}
+        if (updatedRows === 0) {
+            return res.status(404).json({ message: 'Rugi not found' });
+        }
+
+        res.status(200).json({ message: 'Rugi updated successfully' });
+    } catch (err) {
+        res.status(400).json({ message: 'Error updating Rugi', error: err.message });
+    }
+};
+
+const deleteRugi = async (req, res) => {
+    try {
+        const deletedRows = await Rugi.destroy({
+            where: { id: req.params.id }
+        });
+
+        if (deletedRows === 0) {
+            return res.status(404).json({ message: 'Rugi not found' });
+        }
+
+        res.status(200).json({ message: 'Rugi deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error deleting Rugi', error: err.message });
+    }
+};
 
 module.exports = {
     getRugi,
@@ -32,3 +57,4 @@ module.exports = {
     updateRugi,
     deleteRugi,
 };
+

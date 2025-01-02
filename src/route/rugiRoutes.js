@@ -65,10 +65,10 @@ rugiRoutes.get('/rugi/:id', validateRequest.getRugi, rugiController.getRugiById)
 
 /**
  * @swagger
- *
- * /rugi/{id}:
+ * /rugis/{id}:
  *   put:
  *     summary: Update a rugi by ID
+ *     tags: [Rugis]
  *     parameters:
  *       - in: path
  *         name: id
@@ -95,14 +95,14 @@ rugiRoutes.get('/rugi/:id', validateRequest.getRugi, rugiController.getRugiById)
  *       404:
  *         description: Rugi not found
  */
-rugiRoutes.put('/rugi/:id', validateRequest.updateRugi, rugiController.updateRugi);
+rugiRoutes.put('/:id', validateRugi, rugiController.updateRugi);
 
 /**
  * @swagger
- *
- * /rugi/{id}:
+ * /rugis/{id}:
  *   delete:
  *     summary: Delete a rugi by ID
+ *     tags: [Rugis]
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,6 +115,6 @@ rugiRoutes.put('/rugi/:id', validateRequest.updateRugi, rugiController.updateRug
  *       404:
  *         description: Rugi not found
  */
-rugiRoutes.delete('/rugi/:id', validateRequest.deleteRugi, rugiController.deleteRugi);
+rugiRoutes.delete('/:id', rugiController.deleteRugi);
 
 module.exports = rugiRoutes;

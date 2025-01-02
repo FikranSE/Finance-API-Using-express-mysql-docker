@@ -64,6 +64,7 @@ pengeluaranGajiRoutes.get('/pengeluaran-gaji/:id', validateRequest.getPengeluara
  * /pengeluaran-gaji/{id}:
  *   put:
  *     summary: Update a pengeluaran gaji by ID
+ *     tags: [Pengeluaran Gaji]
  *     parameters:
  *       - in: path
  *         name: id
@@ -91,13 +92,14 @@ pengeluaranGajiRoutes.get('/pengeluaran-gaji/:id', validateRequest.getPengeluara
  *       404:
  *         description: Pengeluaran Gaji not found
  */
-pengeluaranGajiRoutes.put('/pengeluaran-gaji/:id', validateRequest.updatePengeluaranGaji, pengeluaranGajiController.updatePengeluaranGaji);
+pengeluaranGajiRoutes.put('/:id', validatePengeluaranGaji, pengeluaranGajiController.updatePengeluaranGaji);
 
 /**
  * @swagger
  * /pengeluaran-gaji/{id}:
  *   delete:
  *     summary: Delete a pengeluaran gaji by ID
+ *     tags: [Pengeluaran Gaji]
  *     parameters:
  *       - in: path
  *         name: id
@@ -110,6 +112,7 @@ pengeluaranGajiRoutes.put('/pengeluaran-gaji/:id', validateRequest.updatePengelu
  *       404:
  *         description: Pengeluaran Gaji not found
  */
-pengeluaranGajiRoutes.delete('/pengeluaran-gaji/:id', validateRequest.deletePengeluaranGaji, pengeluaranGajiController.deletePengeluaranGaji);
+pengeluaranGajiRoutes.delete('/:id', pengeluaranGajiController.deletePengeluaranGaji);
 
 module.exports = pengeluaranGajiRoutes;
+//endfikran

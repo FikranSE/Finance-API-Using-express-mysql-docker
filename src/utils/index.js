@@ -1,53 +1,29 @@
-const jwt = require("jsonwebtoken");
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+// src/utils/index.js
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-function getUserID(req, res) {
-    let token = req.headers.authorization.split(" ")[1];
-    let userId;
-    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, decoded) => {
-        userId = decoded.id;
-    });
-    return userId;
-}
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'your_access_token_secret';
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'your_refresh_token_secret';
 
+const hashPassword = (password) => {
+    const salt = bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(password, salt);
+};
 
-function hashPassword(password) {
-    const saltRounds = 10;
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(password, salt);
-    return hash;
-}
+const checkPassword = (password, hashedPassword) => {
+    return bcrypt.compareSync(password, hashedPassword);
+};
 
-function checkPassword(pass, person_pass) {
-    if (!bcrypt.compareSync(pass, person_pass)) {
-        return res.status(401).send({
-            message: "Wrong password",
-        });
-    }
-
-}
-
-function generateTokens(person_id) {
-    const accessToken = jwt.sign({
-        id: person_id,
-    }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '1h'
-    });
-
-    const refreshToken = jwt.sign({
-        id: person_id,
-    }, process.env.REFRESH_TOKEN_SECRET);
-
-    return {
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-    };
-}
+const generateTokens = (person_id) => {
+    const accessToken = jwt.sign({ id: person_id }, ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+    const refreshToken = jwt.sign({ id: person_id }, REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
+    return { accessToken, refreshToken };
+};
 
 module.exports = {
-    getUserID,
     hashPassword,
     checkPassword,
     generateTokens,
 };
+

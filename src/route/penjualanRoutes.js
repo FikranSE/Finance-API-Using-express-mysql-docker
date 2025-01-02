@@ -60,9 +60,10 @@ penjualanRoutes.get('/penjualan/:id', penjualanController.getPenjualan);
 
 /**
  * @swagger
- * /penjualan/{id}:
+ * /penjualans/{id}:
  *   put:
  *     summary: Update a penjualan by ID
+ *     tags: [Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -89,13 +90,14 @@ penjualanRoutes.get('/penjualan/:id', penjualanController.getPenjualan);
  *       404:
  *         description: Penjualan not found
  */
-penjualanRoutes.put('/penjualan/:id', validateRequest.updatePenjualan, penjualanController.updatePenjualan);
+penjualanRoutes.put('/:id', validatePenjualan, penjualanController.updatePenjualan);
 
 /**
  * @swagger
- * /penjualan/{id}:
+ * /penjualans/{id}:
  *   delete:
  *     summary: Delete a penjualan by ID
+ *     tags: [Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -108,6 +110,7 @@ penjualanRoutes.put('/penjualan/:id', validateRequest.updatePenjualan, penjualan
  *       404:
  *         description: Penjualan not found
  */
-penjualanRoutes.delete('/penjualan/:id', penjualanController.deletePenjualan);
+penjualanRoutes.delete('/:id', penjualanController.deletePenjualan);
 
 module.exports = penjualanRoutes;
+
