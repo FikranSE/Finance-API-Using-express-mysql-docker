@@ -14,7 +14,7 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:3001/api', // Ganti dengan URL produksi jika perlu
+                url: 'http://127.0.0.1:3001/api', // Ganti dengan URL produksi jika perlu
             },
         ],
         components: {

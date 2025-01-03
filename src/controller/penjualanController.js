@@ -1,4 +1,3 @@
-// Mendapatkan semua penjualan
 const Penjualan = require('../model/Penjualan');
 
 const getAllPenjualan = async (req, res) => {
@@ -10,7 +9,6 @@ const getAllPenjualan = async (req, res) => {
     }
 };
 
-// Membuat penjualan baru
 const createPenjualan = async (req, res) => {
     try {
         const { total_penjualan, tanggal } = req.body;
@@ -25,21 +23,23 @@ const createPenjualan = async (req, res) => {
     }
 };
 
-const penjualanService = require('../service/penjualanService');
 
-function getAllPenjualan(req, res) {
-    penjualanService.getAllPenjualan(req, res);
-}
 
-function createPenjualan(req, res) {
-    penjualanService.createPenjualan(req, res);
-}
 
-function getPenjualan(req, res) {
-    penjualanService.getPenjualanById(req, res);
-}
 
-// Mengupdate penjualan
+
+const getPenjualan = async (req, res) => {
+    try {
+        const penjualan = await Penjualan.findByPk(req.params.id);
+        if (!penjualan) {
+            return res.status(404).json({ message: 'Penjualan not found' });
+        }
+        res.status(200).json(penjualan);
+    } catch (err) {
+        res.status(500).json({ message: 'Error retrieving penjualan', error: err.message });
+    }
+};
+
 const updatePenjualan = async (req, res) => {
     try {
         const { total_penjualan, tanggal } = req.body;
@@ -58,7 +58,6 @@ const updatePenjualan = async (req, res) => {
     }
 };
 
-// Menghapus penjualan
 const deletePenjualan = async (req, res) => {
     try {
         const deletedRows = await Penjualan.destroy({

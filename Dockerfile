@@ -5,10 +5,10 @@ FROM alpine
 RUN apk add --update nodejs npm
 
 # Create app directory
-RUN mkdir /blog-app
+RUN mkdir /financeapi
 
 # Move to working directory
-WORKDIR /blog-app
+WORKDIR /financeapi
 
 # Make owner of the working directory to the user
 COPY  ./ ./
@@ -20,7 +20,7 @@ RUN npm install
 EXPOSE 3000
 
 # Move to the server
-WORKDIR /blog-app
+WORKDIR /financeapi
 
 # Start the server
 CMD ["npm","start"]

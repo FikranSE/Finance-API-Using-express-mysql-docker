@@ -23,7 +23,7 @@ const pajakSchema = Joi.object({
     jumlah: Joi.number().precision(2).required(),
     total_pajak: Joi.number().precision(2).required(),
 });
-
+ 
 // Laba Schemas
 const labaSchema = Joi.object({
     nilai: Joi.number().precision(2).required(),

@@ -79,11 +79,3 @@ module.exports = {
 };
 
 
-// Export controller functions
-module.exports = {
-    getAllPajaks,
-    createPajak,
-    getPajak,
-    updatePajak,
-    deletePajak,
-};

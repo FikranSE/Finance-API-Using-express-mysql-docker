@@ -14,11 +14,11 @@ app.use(express.json());
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Register all API routes through the main router
-app.use('/api', routes);
+app.use('/api', routes); 
 
-// Global Error Handling Middleware
+// Global Error Handling Middleware 
 app.use(errorHandler);
-
+  
 // Test Database Connection and Sync Models
 sequelize.authenticate()
     .then(() => {

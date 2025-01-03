@@ -22,7 +22,7 @@ docker compose up --build -d
 Server is now accessible at the
 
 ```
-localhost:3001
+127.0.0.1:3001
 ```
 
 You can delete the containers using the following command:
@@ -36,7 +36,7 @@ docker compose down
 Any endpoint that is exposed by the server can be accessible at the /docs endpoint.
 
 ```
-eg: localhost:3000/api/docs
+eg: 127.0.0.1:3000/api/docs
 ```
 
  

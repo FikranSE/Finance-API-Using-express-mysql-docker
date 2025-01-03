@@ -1,8 +1,5 @@
-// src/controller/pengeluaranGajiController.js
 
 //bagian fikran
-
-
 const PengeluaranGaji = require('../model/PengeluaranGaji');
 
 const getAllPengeluaranGaji = async (req, res) => {
@@ -31,20 +28,6 @@ const createPengeluaranGaji = async (req, res) => {
     }
 };
 
-
-const getPengeluaranGajiById = async (req, res) => {
-    try {
-        const pengeluaranGaji = await PengeluaranGaji.findByPk(req.params.id);
-        if (!pengeluaranGaji) {
-            return res.status(404).json({ message: "Pengeluaran Gaji not found" });
-        }
-        res.status(200).json(pengeluaranGaji);
-    } catch (err) {
-        res.status(500).json({
-            message: err.message || "Some error occurred while retrieving Pengeluaran Gaji.",
-        });
-    }
-};
 
 
 const getPengeluaranGajiById = async (req, res) => {

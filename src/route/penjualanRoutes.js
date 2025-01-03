@@ -71,6 +71,7 @@ penjualanRoutes.post('/', validatePenjualan, penjualanController.createPenjualan
  */
 penjualanRoutes.get('/:id', penjualanController.getPenjualan);
 
+
 /**
  * @swagger
  * /penjualans/{id}:
@@ -126,4 +127,3 @@ penjualanRoutes.put('/:id', validatePenjualan, penjualanController.updatePenjual
 penjualanRoutes.delete('/:id', penjualanController.deletePenjualan);
 
 module.exports = penjualanRoutes;
-

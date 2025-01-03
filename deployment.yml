@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blog-app
+  name: financeapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blog-app
+      app: financeapi
   template:
     metadata:
       labels:
-        app: blog-app
+        app: financeapi
     spec:
       containers:
-      - name: blog-app
-        image: serhhatsari/blog-app
+      - name: financeapi
+        image: fikranse044/financeapi
         env:
         - name: NODE_ENV
           value: development
@@ -66,13 +66,13 @@ spec:
         image: mysql:5.7
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: root
+            value: 
           - name: MYSQL_DATABASE 
-            value: here
+            value: fapi
           - name: MYSQL_USER
-            value: dev
+            value: root
           - name: MYSQL_PASSWORD
-            value: dev
+            value: root
         resources:
           limits:
             memory: "4000Mi"
