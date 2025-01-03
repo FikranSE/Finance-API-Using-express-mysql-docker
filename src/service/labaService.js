@@ -1,4 +1,6 @@
-const Laba = require('../model/laba'); // Ensure correct model import
+// src/service/labaService.js
+// bagian ariq
+const Laba = require('../model/Laba'); // Pastikan model 'Laba' ada dan diekspor dengan benar
 
 const getAllLaba = async () => {
     return Laba.findAll();

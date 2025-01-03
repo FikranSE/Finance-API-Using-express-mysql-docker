@@ -1,23 +1,36 @@
+// src/routes/labaRoutes.js
+// bagian ariq
+
 const express = require('express');
 const labaController = require('../controller/labaController');
+const { validateLaba } = require('../middleware/validateRequest');
 const labaRoutes = express.Router();
 
 /**
  * @swagger
- * /laba:
+ * tags:
+ *   name: Labas
+ *   description: API for managing laba
+ */
+
+/**
+ * @swagger
+ * /labas:
  *   get:
  *     summary: Retrieve all laba
+ *     tags: [Labas]
  *     responses:
  *       200:
  *         description: A list of laba
  */
-labaRoutes.get('/laba', labaController.getAllLaba);
+labaRoutes.get('/', labaController.getAllLaba);
 
 /**
  * @swagger
- * /laba:
+ * /labas:
  *   post:
  *     summary: Create a new laba
+ *     tags: [Labas]
  *     requestBody:
  *       required: true
  *       content:
@@ -30,14 +43,17 @@ labaRoutes.get('/laba', labaController.getAllLaba);
  *     responses:
  *       201:
  *         description: Laba created successfully
+ *       400:
+ *         description: Invalid request
  */
-labaRoutes.post('/laba', labaController.createLaba);
+labaRoutes.post('/', validateLaba, labaController.createLaba);
 
 /**
  * @swagger
- * /laba/{id}:
+ * /labas/{id}:
  *   get:
  *     summary: Retrieve a laba by ID
+ *     tags: [Labas]
  *     parameters:
  *       - in: path
  *         name: id
@@ -50,6 +66,7 @@ labaRoutes.post('/laba', labaController.createLaba);
  *       404:
  *         description: Laba not found
  */
-labaRoutes.get('/laba/:id', labaController.getLaba);
+labaRoutes.get('/:id', labaController.getLaba);
 
 module.exports = labaRoutes;
+
