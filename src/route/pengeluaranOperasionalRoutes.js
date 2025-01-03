@@ -1,26 +1,36 @@
+// src/routes/pengeluaranOperasionalRoutes.js
+// bagian ariq
 const express = require('express');
 const pengeluaranOperasionalController = require('../controller/pengeluaranOperasionalController');
+const { validatePengeluaranOperasional } = require('../middleware/validateRequest');
+
 const pengeluaranOperasionalRoutes = express.Router();
-const validateRequest = require('../middleware/validateRequest'); // Ensure validation middleware is correctly implemented
 
 /**
  * @swagger
- *
+ * tags:
+ *   name: Pengeluaran Operasional
+ *   description: API for managing pengeluaran operasional
+ */
+
+/**
+ * @swagger
  * /pengeluaran-operasionals:
  *   get:
  *     summary: Retrieve all pengeluaran operasionals
+ *     tags: [Pengeluaran Operasional]
  *     responses:
  *       200:
  *         description: An array of pengeluaran operasionals
  */
-pengeluaranOperasionalRoutes.get('/pengeluaran-operasionals', pengeluaranOperasionalController.getAllPengeluaranOperasional);
+pengeluaranOperasionalRoutes.get('/', pengeluaranOperasionalController.getAllPengeluaranOperasional);
 
 /**
  * @swagger
- *
  * /pengeluaran-operasionals:
  *   post:
  *     summary: Create a new pengeluaran operasional
+ *     tags: [Pengeluaran Operasional]
  *     requestBody:
  *       required: true
  *       content:
@@ -41,14 +51,14 @@ pengeluaranOperasionalRoutes.get('/pengeluaran-operasionals', pengeluaranOperasi
  *       400:
  *         description: Invalid request
  */
-pengeluaranOperasionalRoutes.post('/pengeluaran-operasionals', validateRequest.createPengeluaranOperasional, pengeluaranOperasionalController.createPengeluaranOperasional);
+pengeluaranOperasionalRoutes.post('/', validatePengeluaranOperasional, pengeluaranOperasionalController.createPengeluaranOperasional);
 
 /**
  * @swagger
- *
  * /pengeluaran-operasionals/{id}:
  *   get:
  *     summary: Retrieve a pengeluaran operasional by ID
+ *     tags: [Pengeluaran Operasional]
  *     parameters:
  *       - in: path
  *         name: id
@@ -61,14 +71,15 @@ pengeluaranOperasionalRoutes.post('/pengeluaran-operasionals', validateRequest.c
  *       404:
  *         description: Pengeluaran operasional not found
  */
-pengeluaranOperasionalRoutes.get('/pengeluaran-operasionals/:id', validateRequest.getPengeluaranOperasional, pengeluaranOperasionalController.getPengeluaranOperasionalById);
+pengeluaranOperasionalRoutes.get('/:id', pengeluaranOperasionalController.getPengeluaranOperasionalById);
 
+//bagian satria
 /**
  * @swagger
- *
  * /pengeluaran-operasionals/{id}:
  *   put:
  *     summary: Update a pengeluaran operasional by ID
+ *     tags: [Pengeluaran Operasional]
  *     parameters:
  *       - in: path
  *         name: id
@@ -94,15 +105,17 @@ pengeluaranOperasionalRoutes.get('/pengeluaran-operasionals/:id', validateReques
  *         description: Pengeluaran operasional updated successfully
  *       404:
  *         description: Pengeluaran operasional not found
+ *       500:
+ *         description: Server error
  */
-pengeluaranOperasionalRoutes.put('/pengeluaran-operasionals/:id', validateRequest.updatePengeluaranOperasional, pengeluaranOperasionalController.updatePengeluaranOperasional);
+pengeluaranOperasionalRoutes.put('/:id', validatePengeluaranOperasional, pengeluaranOperasionalController.updatePengeluaranOperasional);
 
 /**
  * @swagger
- *
  * /pengeluaran-operasionals/{id}:
  *   delete:
  *     summary: Delete a pengeluaran operasional by ID
+ *     tags: [Pengeluaran Operasional]
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,6 +128,6 @@ pengeluaranOperasionalRoutes.put('/pengeluaran-operasionals/:id', validateReques
  *       404:
  *         description: Pengeluaran operasional not found
  */
-pengeluaranOperasionalRoutes.delete('/pengeluaran-operasionals/:id', validateRequest.deletePengeluaranOperasional, pengeluaranOperasionalController.deletePengeluaranOperasional);
+pengeluaranOperasionalRoutes.delete('/:id', pengeluaranOperasionalController.deletePengeluaranOperasional);
 
 module.exports = pengeluaranOperasionalRoutes;

@@ -1,6 +1,3 @@
-## Description
-
-Blog API implemented using Express.js and MySQL. Sequelize is used for ORM.
 
 ## Installation
 
@@ -29,5 +26,16 @@ You can delete the containers using the following command:
 ```
 docker compose down
 ```
+
+
+
+Any endpoint that is exposed by the server can be accessible at the /docs endpoint.
+
+```
+eg: localhost:3000/api/docs
+```
+
+ 
+
 
 
