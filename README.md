@@ -1,5 +1,8 @@
 
 
+
+
+
 ## Installation
 
 You can install the project using the following command:
@@ -27,5 +30,16 @@ You can delete the containers using the following command:
 ```
 docker compose down
 ```
+
+
+
+Any endpoint that is exposed by the server can be accessible at the /docs endpoint.
+
+```
+eg: localhost:3000/api/docs
+```
+
+ 
+
 
 

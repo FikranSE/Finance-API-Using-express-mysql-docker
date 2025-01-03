@@ -1,3 +1,5 @@
+// src/controller/labaController.js
+// bagian ariq
 const labaService = require('../service/labaService');
 
 const getAllLaba = async (req, res) => {
