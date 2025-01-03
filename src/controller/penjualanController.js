@@ -1,3 +1,30 @@
+// Mendapatkan semua penjualan
+const Penjualan = require('../model/Penjualan');
+
+const getAllPenjualan = async (req, res) => {
+    try {
+        const penjualan = await Penjualan.findAll();
+        res.status(200).json(penjualan);
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+// Membuat penjualan baru
+const createPenjualan = async (req, res) => {
+    try {
+        const { total_penjualan, tanggal } = req.body;
+
+        const penjualan = await Penjualan.create({
+            total_penjualan,
+            tanggal,
+        });
+        res.status(201).json(penjualan);
+    } catch (err) {
+        res.status(400).json({ message: 'Failed to create penjualan', error: err.message });
+    }
+};
+
 const penjualanService = require('../service/penjualanService');
 
 function getAllPenjualan(req, res) {
@@ -12,6 +39,7 @@ function getPenjualan(req, res) {
     penjualanService.getPenjualanById(req, res);
 }
 
+// Mengupdate penjualan
 const updatePenjualan = async (req, res) => {
     try {
         const { total_penjualan, tanggal } = req.body;
@@ -30,6 +58,7 @@ const updatePenjualan = async (req, res) => {
     }
 };
 
+// Menghapus penjualan
 const deletePenjualan = async (req, res) => {
     try {
         const deletedRows = await Penjualan.destroy({
@@ -52,4 +81,4 @@ module.exports = {
     getPenjualan,
     updatePenjualan,
     deletePenjualan,
-};//fikran
+};
