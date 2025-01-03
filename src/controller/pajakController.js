@@ -34,8 +34,8 @@ const getPajak = async (req, res) => {
         res.status(500).json({ message: 'Error retrieving pajak', error: error.message });
     }
 };
-
-// Update Pajak
+// satria
+// Update Pajak 
 const updatePajak = async (req, res) => {
     try {
         const { nama_pajak, persentase, jumlah, total_pajak } = req.body;
@@ -48,9 +48,9 @@ const updatePajak = async (req, res) => {
             return res.status(404).json({ message: 'Pajak not found' });
         }
 
-        res.status(200).json({ message: 'Pajak updated successfully' });
+        res.status(200).json({ message: "Pajak updated successfully" });
     } catch (error) {
-        res.status(400).json({ message: 'Error updating pajak', error: error.message });
+        res.status(500).json({ message: 'Error updating pajak', error: error.message });
     }
 };
 
@@ -68,6 +68,15 @@ const deletePajak = async (req, res) => {
         res.status(500).json({ message: 'Error deleting pajak', error: error.message });
     }
 };
+
+module.exports = {
+    getAllPajaks,
+    createPajak,
+    getPajak,
+    updatePajak,
+    deletePajak,
+};
+
 
 // Export controller functions
 module.exports = {

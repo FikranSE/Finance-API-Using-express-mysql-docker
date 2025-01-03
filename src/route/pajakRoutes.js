@@ -1,6 +1,7 @@
+//fikran
 // src/routes/pajakRoutes.js
 const express = require('express');
-const pajakController = require('../controllers/pajakController');
+const pajakController = require('../controller/pajakController');
 const { validatePajak } = require('../middleware/validateRequest');
 
 const pajakRoutes = express.Router();
@@ -81,6 +82,7 @@ pajakRoutes.post('/', validatePajak, pajakController.createPajak);
  */
 pajakRoutes.get('/:id', pajakController.getPajak);
 
+//satria
 /**
  * @swagger
  * /pajaks/{id}:
@@ -120,7 +122,6 @@ pajakRoutes.put('/:id', validatePajak, pajakController.updatePajak);
  *       - in: path
  *         name: id
  *         required: true
- *         description: Pajak ID
  *         schema:
  *           type: integer
  *     responses:

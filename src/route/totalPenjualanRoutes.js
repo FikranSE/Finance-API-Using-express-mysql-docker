@@ -1,26 +1,36 @@
+//aldo
+// src/routes/totalPenjualanRoutes.js
 const express = require('express');
 const totalPenjualanController = require('../controller/totalPenjualanController');
+const { validateTotalPenjualan } = require('../middleware/validateRequest');
+
 const totalPenjualanRoutes = express.Router();
-const validateRequest = require('../middleware/validateRequest'); // Ensure validation middleware is correctly implemented
 
 /**
  * @swagger
- *
+ * tags:
+ *   name: Total Penjualans
+ *   description: API for managing total penjualans
+ */
+
+/**
+ * @swagger
  * /total-penjualans:
  *   get:
  *     summary: Retrieve all total penjualans
+ *     tags: [Total Penjualans]
  *     responses:
  *       200:
  *         description: A list of total penjualans
  */
-totalPenjualanRoutes.get('/total-penjualans', totalPenjualanController.getTotalPenjualan);
+totalPenjualanRoutes.get('/', totalPenjualanController.getTotalPenjualan);
 
 /**
  * @swagger
- *
  * /total-penjualans:
  *   post:
  *     summary: Create a new total penjualan
+ *     tags: [Total Penjualans]
  *     requestBody:
  *       required: true
  *       content:
@@ -42,14 +52,14 @@ totalPenjualanRoutes.get('/total-penjualans', totalPenjualanController.getTotalP
  *       400:
  *         description: Invalid request
  */
-totalPenjualanRoutes.post('/total-penjualans', validateRequest.createTotalPenjualan, totalPenjualanController.createTotalPenjualan);
+totalPenjualanRoutes.post('/', validateTotalPenjualan, totalPenjualanController.createTotalPenjualan);
 
 /**
  * @swagger
- *
  * /total-penjualans/{id}:
  *   get:
  *     summary: Retrieve a total penjualan by ID
+ *     tags: [Total Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -62,14 +72,15 @@ totalPenjualanRoutes.post('/total-penjualans', validateRequest.createTotalPenjua
  *       404:
  *         description: Total penjualan not found
  */
-totalPenjualanRoutes.get('/total-penjualans/:id', totalPenjualanController.getTotalPenjualanById);
+totalPenjualanRoutes.get('/:id', totalPenjualanController.getTotalPenjualanById);
 
+//satria
 /**
  * @swagger
- *
  * /total-penjualans/{id}:
  *   put:
  *     summary: Update a total penjualan by ID
+ *     tags: [Total Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -99,14 +110,14 @@ totalPenjualanRoutes.get('/total-penjualans/:id', totalPenjualanController.getTo
  *       404:
  *         description: Total penjualan not found
  */
-totalPenjualanRoutes.put('/total-penjualans/:id', validateRequest.updateTotalPenjualan, totalPenjualanController.updateTotalPenjualan);
+totalPenjualanRoutes.put('/:id', validateTotalPenjualan, totalPenjualanController.updateTotalPenjualan);
 
 /**
  * @swagger
- *
  * /total-penjualans/{id}:
  *   delete:
  *     summary: Delete a total penjualan by ID
+ *     tags: [Total Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -119,6 +130,6 @@ totalPenjualanRoutes.put('/total-penjualans/:id', validateRequest.updateTotalPen
  *       404:
  *         description: Total penjualan not found
  */
-totalPenjualanRoutes.delete('/total-penjualans/:id', validateRequest.deleteTotalPenjualan, totalPenjualanController.deleteTotalPenjualan);
+totalPenjualanRoutes.delete('/:id', totalPenjualanController.deleteTotalPenjualan);
 
 module.exports = totalPenjualanRoutes;
