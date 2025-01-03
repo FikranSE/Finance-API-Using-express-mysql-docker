@@ -27,7 +27,7 @@ You can delete the containers using the following command:
 docker compose down
 ```
 
-#### Swagger Page
+
 
 Any endpoint that is exposed by the server can be accessible at the /docs endpoint.
 
@@ -35,5 +35,7 @@ Any endpoint that is exposed by the server can be accessible at the /docs endpoi
 eg: localhost:3000/api/docs
 ```
 
- npm start
-```
+ 
+
+
+

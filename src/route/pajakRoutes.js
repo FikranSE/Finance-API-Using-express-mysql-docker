@@ -1,6 +1,6 @@
 // src/routes/pajakRoutes.js
 const express = require('express');
-const pajakController = require('../controllers/pajakController');
+const pajakController = require('../controller/pajakController');
 const { validatePajak } = require('../middleware/validateRequest');
 
 const pajakRoutes = express.Router();
@@ -80,6 +80,7 @@ pajakRoutes.post('/', validatePajak, pajakController.createPajak);
  *         description: Server error
  */
 pajakRoutes.get('/:id', pajakController.getPajak);
+//endfikran
 
 /**
  * @swagger

@@ -1,24 +1,34 @@
 const express = require('express');
 const pengeluaranGajiController = require('../controller/pengeluaranGajiController');
+const { validatePengeluaranGaji } = require('../middleware/validateRequest');
+
 const pengeluaranGajiRoutes = express.Router();
-const validateRequest = require('../middleware/validateRequest'); // Ensure validation middleware is correctly implemented
+
+/**
+ * @swagger
+ * tags:
+ *   name: Pengeluaran Gaji
+ *   description: API for managing pengeluaran gaji
+ */
 
 /**
  * @swagger
  * /pengeluaran-gaji:
  *   get:
  *     summary: Retrieve all pengeluaran gaji records
+ *     tags: [Pengeluaran Gaji]
  *     responses:
  *       200:
  *         description: A list of pengeluaran gaji records
  */
-pengeluaranGajiRoutes.get('/pengeluaran-gaji', pengeluaranGajiController.getPengeluaranGaji);
+pengeluaranGajiRoutes.get('/', pengeluaranGajiController.getAllPengeluaranGaji);
 
 /**
  * @swagger
  * /pengeluaran-gaji:
  *   post:
  *     summary: Create a new pengeluaran gaji record
+ *     tags: [Pengeluaran Gaji]
  *     requestBody:
  *       required: true
  *       content:
@@ -37,14 +47,17 @@ pengeluaranGajiRoutes.get('/pengeluaran-gaji', pengeluaranGajiController.getPeng
  *     responses:
  *       201:
  *         description: Pengeluaran Gaji created successfully
+ *       400:
+ *         description: Invalid request
  */
-pengeluaranGajiRoutes.post('/pengeluaran-gaji', validateRequest.createPengeluaranGaji, pengeluaranGajiController.createPengeluaranGaji);
+pengeluaranGajiRoutes.post('/', validatePengeluaranGaji, pengeluaranGajiController.createPengeluaranGaji);
 
 /**
  * @swagger
  * /pengeluaran-gaji/{id}:
  *   get:
  *     summary: Retrieve a pengeluaran gaji by ID
+ *     tags: [Pengeluaran Gaji]
  *     parameters:
  *       - in: path
  *         name: id
@@ -57,13 +70,14 @@ pengeluaranGajiRoutes.post('/pengeluaran-gaji', validateRequest.createPengeluara
  *       404:
  *         description: Pengeluaran Gaji not found
  */
-pengeluaranGajiRoutes.get('/pengeluaran-gaji/:id', validateRequest.getPengeluaranGaji, pengeluaranGajiController.getPengeluaranGajiById);
+pengeluaranGajiRoutes.get('/:id', pengeluaranGajiController.getPengeluaranGajiById);
 
 /**
  * @swagger
  * /pengeluaran-gaji/{id}:
  *   put:
  *     summary: Update a pengeluaran gaji by ID
+ *     tags: [Pengeluaran Gaji]
  *     parameters:
  *       - in: path
  *         name: id
@@ -91,13 +105,14 @@ pengeluaranGajiRoutes.get('/pengeluaran-gaji/:id', validateRequest.getPengeluara
  *       404:
  *         description: Pengeluaran Gaji not found
  */
-pengeluaranGajiRoutes.put('/pengeluaran-gaji/:id', validateRequest.updatePengeluaranGaji, pengeluaranGajiController.updatePengeluaranGaji);
+pengeluaranGajiRoutes.put('/:id', validatePengeluaranGaji, pengeluaranGajiController.updatePengeluaranGaji);
 
 /**
  * @swagger
  * /pengeluaran-gaji/{id}:
  *   delete:
  *     summary: Delete a pengeluaran gaji by ID
+ *     tags: [Pengeluaran Gaji]
  *     parameters:
  *       - in: path
  *         name: id
@@ -110,6 +125,7 @@ pengeluaranGajiRoutes.put('/pengeluaran-gaji/:id', validateRequest.updatePengelu
  *       404:
  *         description: Pengeluaran Gaji not found
  */
-pengeluaranGajiRoutes.delete('/pengeluaran-gaji/:id', validateRequest.deletePengeluaranGaji, pengeluaranGajiController.deletePengeluaranGaji);
+pengeluaranGajiRoutes.delete('/:id', pengeluaranGajiController.deletePengeluaranGaji);
 
 module.exports = pengeluaranGajiRoutes;
+//endfikran

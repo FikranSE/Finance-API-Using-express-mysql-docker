@@ -12,7 +12,6 @@ const rugiRoutes = require('./rugiRoutes');
 const totalPenjualanRoutes = require('./totalPenjualanRoutes');
 
 const verifyToken = require('../middleware/verifyToken'); // Correct import
-const validateRequest = require('../middleware/validateRequest'); // Correct import
 
 // Public routes
 routes.use('/auth', authRoutes);

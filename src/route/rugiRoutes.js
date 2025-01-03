@@ -1,26 +1,34 @@
 const express = require('express');
 const rugiController = require('../controller/rugiController');
+const { validateRugi } = require('../middleware/validateRequest');
+
 const rugiRoutes = express.Router();
-const validateRequest = require('../middleware/validateRequest'); // Ensure validation middleware is correctly implemented
 
 /**
  * @swagger
- *
- * /rugi:
+ * tags:
+ *   name: Rugis
+ *   description: API for managing rugis
+ */
+
+/**
+ * @swagger
+ * /rugis:
  *   get:
  *     summary: Retrieve all rugi
+ *     tags: [Rugis]
  *     responses:
  *       200:
  *         description: A list of rugi
  */
-rugiRoutes.get('/rugi', rugiController.getRugi);
+rugiRoutes.get('/', rugiController.getRugi);
 
 /**
  * @swagger
- *
- * /rugi:
+ * /rugis:
  *   post:
  *     summary: Create a new rugi
+ *     tags: [Rugis]
  *     requestBody:
  *       required: true
  *       content:
@@ -41,14 +49,14 @@ rugiRoutes.get('/rugi', rugiController.getRugi);
  *       400:
  *         description: Invalid request
  */
-rugiRoutes.post('/rugi', validateRequest.createRugi, rugiController.createRugi);
+rugiRoutes.post('/', validateRugi, rugiController.createRugi);
 
 /**
  * @swagger
- *
- * /rugi/{id}:
+ * /rugis/{id}:
  *   get:
  *     summary: Retrieve a rugi by ID
+ *     tags: [Rugis]
  *     parameters:
  *       - in: path
  *         name: id
@@ -61,14 +69,14 @@ rugiRoutes.post('/rugi', validateRequest.createRugi, rugiController.createRugi);
  *       404:
  *         description: Rugi not found
  */
-rugiRoutes.get('/rugi/:id', validateRequest.getRugi, rugiController.getRugiById);
+rugiRoutes.get('/:id', rugiController.getRugiById);
 
 /**
  * @swagger
- *
- * /rugi/{id}:
+ * /rugis/{id}:
  *   put:
  *     summary: Update a rugi by ID
+ *     tags: [Rugis]
  *     parameters:
  *       - in: path
  *         name: id
@@ -95,14 +103,14 @@ rugiRoutes.get('/rugi/:id', validateRequest.getRugi, rugiController.getRugiById)
  *       404:
  *         description: Rugi not found
  */
-rugiRoutes.put('/rugi/:id', validateRequest.updateRugi, rugiController.updateRugi);
+rugiRoutes.put('/:id', validateRugi, rugiController.updateRugi);
 
 /**
  * @swagger
- *
- * /rugi/{id}:
+ * /rugis/{id}:
  *   delete:
  *     summary: Delete a rugi by ID
+ *     tags: [Rugis]
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,6 +123,6 @@ rugiRoutes.put('/rugi/:id', validateRequest.updateRugi, rugiController.updateRug
  *       404:
  *         description: Rugi not found
  */
-rugiRoutes.delete('/rugi/:id', validateRequest.deleteRugi, rugiController.deleteRugi);
+rugiRoutes.delete('/:id', rugiController.deleteRugi);
 
 module.exports = rugiRoutes;
