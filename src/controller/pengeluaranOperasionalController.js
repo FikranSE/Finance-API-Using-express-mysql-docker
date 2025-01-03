@@ -1,5 +1,5 @@
-// ariq
-// src/controller/pengeluaranOperasionalController.js
+
+// bagian ariq
 const PengeluaranOperasional = require('../model/PengeluaranOperasional');
 
 const getAllPengeluaranOperasional = async (req, res) => {
@@ -28,7 +28,7 @@ const createPengeluaranOperasional = async (req, res) => {
     }
 };
 
-// satria
+//bagian Satria
 const getPengeluaranOperasionalById = async (req, res) => {
     try {
         const pengeluaranOperasional = await PengeluaranOperasional.findByPk(req.params.id);

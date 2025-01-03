@@ -1,64 +1,65 @@
-const personModel = require("../model/PengeluaranGaji");
+// src/service/authService.js
+const personModel = require("../model/Person"); // Pastikan model bernama 'Person' sesuai
 const { hashPassword, checkPassword, generateTokens } = require("../utils/index");
 
-function register(req, res) {
-    personModel.build({
-        person_name: req.body.name,
-        person_surname: req.body.surname,
-        person_mail: req.body.mail,
-        person_password: hashPassword(req.body.password),
-    })
-        .save()
-        .then((person) => {
-            console.log(person);
-            return res.status(200).send({
-                name: req.body.name,
-                surname: req.body.surname,
-                mail: req.body.mail,
-                accessToken: generateTokens(person.person_id).accessToken,
-                refreshToken: generateTokens(person.person_id).refreshToken,
-            });
-        })
-        .catch((err) => {
-            return res.status(400).send({
-                status: "error",
-                message: err["errors"][0]["message"],
-            });
+const register = async (req, res) => {
+    try {
+        const { name, surname, mail, password } = req.body;
+        const hashedPassword = hashPassword(password);
+
+        const person = await personModel.create({
+            person_name: name,
+            person_surname: surname,
+            person_mail: mail,
+            person_password: hashedPassword,
         });
-}
 
-function login(req, res) {
-    personModel.findOne({
-        where: {
-            person_mail: req.body.mail,
-        },
-    })
-        .then((person) => {
-            if (!person) {
-                return res.status(404).send({
-                    message: "Person not found",
-                });
-            }
+        const tokens = generateTokens(person.person_id);
 
-            checkPassword(req.body.password, person.person_password);
-
-            const tokens = generateTokens(person.person_id);
-
-            return res.status(200).send({
-                accessToken: tokens.accessToken,
-                refreshToken: tokens.refreshToken,
-                name: person.person_name,
-                surname: person.person_surname,
-                mail: person.person_mail,
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            return res.status(400).send({
-                message: "Error while finding person",
-            });
+        res.status(201).json({
+            name: person.person_name,
+            surname: person.person_surname,
+            mail: person.person_mail,
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken,
         });
-}
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({
+            status: "error",
+            message: err.errors ? err.errors[0].message : err.message,
+        });
+    }
+};
+
+const login = async (req, res) => {
+    try {
+        const { mail, password } = req.body;
+        const person = await personModel.findOne({ where: { person_mail: mail } });
+
+        if (!person) {
+            return res.status(404).json({ message: "Person not found" });
+        }
+
+        const validPassword = checkPassword(password, person.person_password);
+        if (!validPassword) {
+            return res.status(401).json({ message: "Invalid password" });
+        }
+
+        const tokens = generateTokens(person.person_id);
+
+        res.status(200).json({
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken,
+            name: person.person_name,
+            surname: person.person_surname,
+            mail: person.person_mail,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ message: "Error while finding person", error: err.message });
+    }
+};
 
 module.exports = {
     register,

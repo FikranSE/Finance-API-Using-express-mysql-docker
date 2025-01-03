@@ -81,6 +81,7 @@ pajakRoutes.post('/', validatePajak, pajakController.createPajak);
  *         description: Server error
  */
 pajakRoutes.get('/:id', pajakController.getPajak);
+//endfikran
 
 //satria
 /**

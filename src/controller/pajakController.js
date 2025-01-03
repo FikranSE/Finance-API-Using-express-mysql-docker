@@ -1,5 +1,5 @@
-// src/controllers/pajakController.js
-const Pajak = require('../models/Pajak');
+// src/controller/pajakController.js
+const Pajak = require('../model/Pajak');
 
 // Get all Pajaks
 const getAllPajaks = async (req, res) => {
@@ -33,9 +33,10 @@ const getPajak = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving pajak', error: error.message });
     }
-};
-// satria
-// Update Pajak 
+};//fikran
+
+
+// Update Pajak
 const updatePajak = async (req, res) => {
     try {
         const { nama_pajak, persentase, jumlah, total_pajak } = req.body;

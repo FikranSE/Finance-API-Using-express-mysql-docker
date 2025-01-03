@@ -1,5 +1,5 @@
+
 //ariq
-// src/routes/pengeluaranOperasionalRoutes.js
 const express = require('express');
 const pengeluaranOperasionalController = require('../controller/pengeluaranOperasionalController');
 const { validatePengeluaranOperasional } = require('../middleware/validateRequest');
@@ -72,6 +72,7 @@ pengeluaranOperasionalRoutes.post('/', validatePengeluaranOperasional, pengeluar
  *         description: Pengeluaran operasional not found
  */
 pengeluaranOperasionalRoutes.get('/:id', pengeluaranOperasionalController.getPengeluaranOperasionalById);
+
 
 //satria
 /**

@@ -1,11 +1,14 @@
-const auth_routes = require('express').Router();
+// src/routes/authRoutes.js
+const express = require('express');
 const authController = require('../controller/authController');
-const validateRequest = require('../middleware/validateRequest');
+const { validateRegister, validateLogin } = require('../middleware/validateRequest');
+
+const authRoutes = express.Router();
 
 /**
  * @swagger
  *
- * /register:
+ * /auth/register:
  *   post:
  *     summary: Register a new user
  *     requestBody:
@@ -16,11 +19,11 @@ const validateRequest = require('../middleware/validateRequest');
  *             type: object
  *             properties:
  *               name:
- *                type: string
- *                example: Serhat
+ *                 type: string
+ *                 example: Serhat
  *               surname:
- *                type: string
- *                example: SARI
+ *                 type: string
+ *                 example: SARI
  *               mail:
  *                 type: string
  *                 example: serhat@gmail.com
@@ -33,12 +36,12 @@ const validateRequest = require('../middleware/validateRequest');
  *       400:
  *         description: Invalid request
  */
-auth_routes.post('/register', validateRequest.validateRegister, authController.register)
+authRoutes.post('/register', validateRegister, authController.register);
 
 /**
  * @swagger
  *
- * /login:
+ * /auth/login:
  *   post:
  *     summary: Login a user
  *     requestBody:
@@ -59,8 +62,9 @@ auth_routes.post('/register', validateRequest.validateRegister, authController.r
  *         description: Login successful
  *       400:
  *         description: Invalid request
+ *       404:
+ *         description: Person not found
  */
-auth_routes.post('/login', validateRequest.validateLogin, authController.login)
+authRoutes.post('/login', validateLogin, authController.login);
 
-
-module.exports = auth_routes;
+module.exports = authRoutes;
