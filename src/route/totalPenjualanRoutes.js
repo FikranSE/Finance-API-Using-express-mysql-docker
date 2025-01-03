@@ -1,3 +1,5 @@
+//aldo
+// src/routes/totalPenjualanRoutes.js
 const express = require('express');
 const totalPenjualanController = require('../controller/totalPenjualanController');
 const { validateTotalPenjualan } = require('../middleware/validateRequest');
@@ -72,12 +74,13 @@ totalPenjualanRoutes.post('/', validateTotalPenjualan, totalPenjualanController.
  */
 totalPenjualanRoutes.get('/:id', totalPenjualanController.getTotalPenjualanById);
 
+//satria
 /**
  * @swagger
- *
  * /total-penjualans/{id}:
  *   put:
  *     summary: Update a total penjualan by ID
+ *     tags: [Total Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -107,14 +110,14 @@ totalPenjualanRoutes.get('/:id', totalPenjualanController.getTotalPenjualanById)
  *       404:
  *         description: Total penjualan not found
  */
-totalPenjualanRoutes.put('/total-penjualans/:id', validateRequest.updateTotalPenjualan, totalPenjualanController.updateTotalPenjualan);
+totalPenjualanRoutes.put('/:id', validateTotalPenjualan, totalPenjualanController.updateTotalPenjualan);
 
 /**
  * @swagger
- *
  * /total-penjualans/{id}:
  *   delete:
  *     summary: Delete a total penjualan by ID
+ *     tags: [Total Penjualans]
  *     parameters:
  *       - in: path
  *         name: id
@@ -127,6 +130,6 @@ totalPenjualanRoutes.put('/total-penjualans/:id', validateRequest.updateTotalPen
  *       404:
  *         description: Total penjualan not found
  */
-totalPenjualanRoutes.delete('/total-penjualans/:id', validateRequest.deleteTotalPenjualan, totalPenjualanController.deleteTotalPenjualan);
+totalPenjualanRoutes.delete('/:id', totalPenjualanController.deleteTotalPenjualan);
 
 module.exports = totalPenjualanRoutes;

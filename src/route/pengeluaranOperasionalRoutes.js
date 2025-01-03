@@ -1,5 +1,5 @@
-// src/routes/pengeluaranOperasionalRoutes.js
-// bagian ariq
+
+//ariq
 const express = require('express');
 const pengeluaranOperasionalController = require('../controller/pengeluaranOperasionalController');
 const { validatePengeluaranOperasional } = require('../middleware/validateRequest');
@@ -73,7 +73,8 @@ pengeluaranOperasionalRoutes.post('/', validatePengeluaranOperasional, pengeluar
  */
 pengeluaranOperasionalRoutes.get('/:id', pengeluaranOperasionalController.getPengeluaranOperasionalById);
 
-//bagian satria
+
+//satria
 /**
  * @swagger
  * /pengeluaran-operasionals/{id}:

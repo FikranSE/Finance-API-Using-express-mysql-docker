@@ -1,6 +1,6 @@
+
 const TotalPenjualan = require('../model/TotalPenjualan');
 
-// Mendapatkan semua data total penjualan
 const getTotalPenjualan = async (req, res) => {
     try {
         const penjualan = await TotalPenjualan.findAll();
@@ -10,7 +10,7 @@ const getTotalPenjualan = async (req, res) => {
     }
 };
 
-// Membuat data total penjualan baru
+
 const createTotalPenjualan = async (req, res) => {
     try {
         const { product, quantity, price, total } = req.body;
@@ -21,7 +21,7 @@ const createTotalPenjualan = async (req, res) => {
     }
 };
 
-// Mendapatkan data total penjualan berdasarkan ID
+
 const getTotalPenjualanById = async (req, res) => {
     try {
         const penjualan = await TotalPenjualan.findByPk(req.params.id);
@@ -31,6 +31,41 @@ const getTotalPenjualanById = async (req, res) => {
         res.status(200).json(penjualan);
     } catch (err) {
         res.status(500).json({ message: 'Error retrieving total penjualan', error: err.message });
+    }
+};
+
+//satria
+const updateTotalPenjualan = async (req, res) => {
+    try {
+        const { product, quantity, price, total } = req.body;
+        const [updatedRows] = await TotalPenjualan.update(
+            { product, quantity, price, total },
+            { where: { id: req.params.id } }
+        );
+
+        if (updatedRows === 0) {
+            return res.status(404).json({ message: 'Penjualan not found' });
+        }
+
+        res.status(200).json({ message: 'Penjualan updated successfully' });
+    } catch (err) {
+        res.status(400).json({ message: 'Error updating total penjualan', error: err.message });
+    }
+};
+
+const deleteTotalPenjualan = async (req, res) => {
+    try {
+        const deletedRows = await TotalPenjualan.destroy({
+            where: { id: req.params.id }
+        });
+
+        if (deletedRows === 0) {
+            return res.status(404).json({ message: 'Penjualan not found' });
+        }
+
+        res.status(200).json({ message: 'Penjualan deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error deleting total penjualan', error: err.message });
     }
 };
 
@@ -60,6 +95,7 @@ function updateTotalPenjualan(req, res) {
 function deleteTotalPenjualan(req, res) {
     totalPenjualanService.deleteTotalPenjualan(req, res);
 }
+
 
 module.exports = {
     getTotalPenjualan,

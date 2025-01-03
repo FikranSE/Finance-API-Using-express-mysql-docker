@@ -1,4 +1,4 @@
-// src/controller/pengeluaranOperasionalController.js
+
 // bagian ariq
 const PengeluaranOperasional = require('../model/PengeluaranOperasional');
 
