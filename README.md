@@ -1,6 +1,4 @@
-## Description
 
-Blog API implemented using Express.js and MySQL. Sequelize is used for ORM.
 
 ## Installation
 
